@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>🌎 </title>
+  <script src="assets/jquery.min.js"></script>
+  <style type="text/css">
+  /* @font-face {
+    font-family: 'Editorial New';
+    src: url('styling/EditorialNew-Light.woff2') format('woff2'),
+        url('styling/EditorialNew-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+} */
+
+
+    
+    body{
+      display: flex;
+      flex-direction: column;
+      
+      min-height: 100vh;
+/*      background:#F34822;*/
+      background:#fff;
+      font-family: "Editorial New";
+      margin: 0; padding: 0;
+    }
+  
+    main{
+      flex-grow: 1;
+      text-align: center;
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+button, a {
+  display:inline;
+  font-size: 1.5rem;
+  padding: 0.25rem 0.75rem;
+  margin: 0;
+  line-height: 140%;
+  background: none;
+  border: 0;
+  font-family: "Editorial New";
+  cursor: pointer;
+  background: #FFDFFC;
+  color:#F34822;
+  transition: box-shadow 200ms ease-in-out;
+  box-shadow: inset -4px -4px 8px rgba(75, 161, 255, 0.51);
+  border-radius: 4px;
+  margin: .25rem;
+  text-decoration: none;
+  text-transform: capitalize;
+}
+
+a:hover, button:hover {
+  box-shadow: inset -4px -8px 16px #4BA1FF;
+}
+
+    #items{
+      display: flex;
+      flex-wrap: wrap;
+      text-align: center;
+      justify-content: center;
+    }
+    
+    #world{
+      margin: 0;
+      padding: 0;
+      height: 50vh;
+      width: 100%;
+      background: #fff;
+      background-size: cover;
+      background-image: url(images/cover.png);
+    }
+    
+    #world img{
+      object-fit: contain;
+      max-width: 100%;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <div id="world"></div>
+
+<main>
+
+  
+  <button href="world/index.html">Page</button>
+  <br><br>
+  
+  <div id="items">
+    
+<!--
+  <button href="flower.html">Flower</button>
+  <button href="cloud.html">Cloud</button>
+  <button href="angel.html">Angel</button>
+  <button href="bunny.html">Sun</button>
+  <button href="bird.html">Bird</button>
+  <button href="butterfly.html">Butterfly</button>
+  <button href="balloon.html">Balloon</button>
+  <button href="raincloud.html">Raincloud</button>
+  <button href="stone.html">Stone</button>
+  <button href="tide.html">Tide</button>
+  <button href="frog.html">Frog</button>
+  <button href="rose.html">Rose</button>
+-->
+
+  </div>
+  
+
+
+
+
+
+</main>
+
+  <script type="text/javascript">
+  
+  $("main").on("click", "button", function(){
+    location.href = $(this).attr("href");
+  });
+    
+
+   
+  
+    $(document).ready(function() {
+      // Fetch HTML files from the server using jQuery
+      $.ajax({
+        url: '/api/html-files',
+        method: 'GET',
+        dataType: 'json',
+        success: function(files) {
+          // Ensure files is an array of strings
+          if (Array.isArray(files)) {
+            files.forEach(function(file) {
+              // Ensure file is a string and ends with '.html'
+              if (typeof file === 'string' && file.endsWith('.html')) {
+                const fileName = file.replace('.html', '');
+                const button = $('<a></a>')                  .text(fileName)                                    .attr("href", fileName + ".html")
+
+                $('#items').append(button);
+              } else {
+                console.error('Unexpected file format:', file);
+              }
+            });
+          } else {
+            console.error('Expected an array of files:', files);
+          }
+        },
+        error: function(xhr, status, error) {
+          console.error('Error fetching files:', error);
+        }
+      });
+    });
+
+  </script>
+
+</body>
+</html>

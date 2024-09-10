@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Form</title>
+  <style type="text/css">
+  @font-face {
+    font-family: 'Editorial New';
+    src: url('styling/EditorialNew-Light.woff2') format('woff2'),
+        url('styling/EditorialNew-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+     
+    body{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      place-items: center;
+      min-height: 100vh;
+/*      background:#F34822;*/
+      background:#fff;
+      font-family: "Editorial New";
+      margin: 0; padding: 0;
+    }
+  
+    main{
+      text-align: center;
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    label{
+      display: block;
+    }
+    
+    
+button, a, input::file-selector-button, input[type='submit'] {
+  display:inline;
+  font-size: 1.5rem;
+  padding: 0.25rem 0.75rem;
+  margin: 0;
+  line-height: 140%;
+  background: none;
+  border: 0;
+  font-family: "Editorial New";
+  cursor: pointer;
+  background: #FFDFFC;
+  color:#F34822;
+  transition: box-shadow 200ms ease-in-out;
+  box-shadow: inset -4px -4px 8px rgba(75, 161, 255, 0.51);
+  border-radius: 4px;
+  margin: .25rem;
+  text-decoration: none;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+a:hover, button:hover, input:hover::file-selector-button, input[type='submit']:hover {
+  box-shadow: inset -4px -8px 16px #4BA1FF;
+}
+    
+    input[type='text']{
+      padding: .25rem;
+      font-size: 1rem;
+      font-family: monospace;
+      width: 100%;
+      border: 1px solid rgba(75, 161, 255, 0.51);
+      margin: .2rem;
+    }
+    
+    #form{
+      padding: 2rem;
+      background: #fff1fe;
+      border-radius: 32px;
+      margin: 2rem 0;
+    }
+    
+    h1{
+      font-weight: normal;
+      letter-spacing: -1px;
+    }
+    
+    label{ font-size: .8rem; }
+  
+  
+  </style>
+</head>
+<body>
+  <main>
+  <h1>Make an object</h1>
+  <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+    <div id="form">
+    <label for="objectName">Name your object </label>
+    <input type="text" id="objectName" name="objectName" required><br><br>
+    <label for="image">Image</label>
+    <input type="file" id="image" name="image" accept="image/*" required><br><br>
+    <label for="sound">Sound</label>
+    <input type="file" id="sound" name="sound" accept="audio/wav" required>
+    </div>
+    
+    
+    <input type="submit" value="Upload">
+  </form>
+  </main>
+  
+</body>
+</html>
