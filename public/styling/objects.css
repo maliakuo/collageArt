@@ -1,3 +1,6 @@
+@font-face { font-family: "pixel"; 
+  src: url("PixelifySans-Regular.ttf"); } 
+
 #title h1 {
     font-weight: normal;
     letter-spacing: -0.5px;
@@ -7,6 +10,8 @@
   
   main {
     outline: 1px solid red;
+    /* background-image: url(../images/gradient_glitch.png);
+    background-size: cover; */
   }
   
   #actions {
@@ -15,10 +20,21 @@
     padding: 0.25rem 1rem;
     bottom: 0;
   }
+
   #actions #volume {
     height: 14px;
     margin-bottom: 0;
   }
+
+  #actions .category {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #actions .category p {
+    margin: 0;
+  }
+
   @media only screen and (max-width: 408px) {
     #actions {
       transform: scale(0.8);
@@ -33,11 +49,12 @@
   .caption {
     position: fixed;
     width: 100%;
-    font-family: sans-serif;
+    font-family: "pixel";
     top: 0;
     padding: 1rem 0.25rem;
     text-align: center;
   }
+
   @media only screen and (max-width: 408px) {
     .caption {
       font-size: 0.6rem;

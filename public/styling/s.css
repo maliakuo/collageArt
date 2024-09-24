@@ -11,6 +11,17 @@ body {
   letter-spacing: -1%;
 } */
 
+@font-face { font-family: "source-code"; 
+  src: url("SourceCodePro-VariableFont_wght.ttf"); } 
+
+@font-face { font-family: "pixel"; 
+  src: url("PixelifySans-Regular.ttf"); } 
+
+body {
+  font-family: "pixel";
+}
+
+
 main {
   position: absolute;
   top: 0;
@@ -78,6 +89,7 @@ main {
   background: none;
   border: 0;
   /* font-family: "Editorial New"; */
+  font-family: "pixel";
   cursor: pointer;
   background: #E7FF53;
   transition: box-shadow 200ms ease-in-out;

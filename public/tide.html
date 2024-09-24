@@ -57,6 +57,8 @@
     
     <sup>Look</sup>
     <button action="grow" value="0.1">Grow</button>
+    <button action="shrink" value="0.1">Shrink</button>
+
     <button action="flip">Flip</button>
 
 
@@ -141,6 +143,18 @@ var Actions = {
     $("#object").css("transform", "scale(" + (currScale + parseFloat(intensity)) +")")
     
   },
+
+  "shrink": function(intensity){
+    
+    let currScale =  parseFloat(($('#object').attr('style') || '').match(/scale\s*\(([^)]+)\)/)?.[1]?.trim()) || 1;
+
+    console.log("currScale: ", currScale);
+                                
+      console.log(intensity);
+                                
+    $("#object").css("transform", "scale(" + (currScale - parseFloat(intensity)) +")")
+    
+  },         
                                 
   "flip": function(){
     var isFlipped = $("#object").data('flipped') === 'true';

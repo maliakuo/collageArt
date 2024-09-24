@@ -7,16 +7,14 @@
   <title>🌎 </title>
   <script src="assets/jquery.min.js"></script>
   <style type="text/css">
-  /* @font-face {
-    font-family: 'Editorial New';
-    src: url('styling/EditorialNew-Light.woff2') format('woff2'),
-        url('styling/EditorialNew-Light.woff') format('woff');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-} */
+    /* @font-face { font-family: source-code; 
+      src: url("styling/SourceCodePro-VariableFont_wght.ttf"); }  */
+      @font-face { font-family: pixel; 
+      src: url("styling/PixelifySans-Regular.ttf"); } 
 
-
+    * {
+      font-family: pixel;
+    }
     
     body{
       display: flex;
@@ -24,42 +22,44 @@
       
       min-height: 100vh;
 /*      background:#F34822;*/
-      background:#fff;
-      font-family: "Editorial New";
+      /* background:#c8c8c8; */
+      background-image: url("./images/gradient.avif");
+      background-size: cover;
+      font-family: "source-code";
       margin: 0; padding: 0;
     }
   
     main{
       flex-grow: 1;
       text-align: center;
-      max-width: 620px;
+      max-width: 800px;
       margin: 0 auto;
       padding: 2rem;
     }
     
-button, a {
-  display:inline;
-  font-size: 1.5rem;
-  padding: 0.25rem 0.75rem;
-  margin: 0;
-  line-height: 140%;
-  background: none;
-  border: 0;
-  font-family: "Editorial New";
-  cursor: pointer;
-  background: #FFDFFC;
-  color:#F34822;
-  transition: box-shadow 200ms ease-in-out;
-  box-shadow: inset -4px -4px 8px rgba(75, 161, 255, 0.51);
-  border-radius: 4px;
-  margin: .25rem;
-  text-decoration: none;
-  text-transform: capitalize;
-}
+    button, a {
+      display:inline;
+      font-size: 1.5rem;
+      padding: 0.25rem 0.75rem;
+      line-height: 140%;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      /* background: #FFDFFC; */
+      color:#040404;
+      transition: box-shadow 200ms ease-in-out;
+      /* box-shadow: inset -4px -4px 8px rgba(75, 161, 255, 0.51); */
+      
+      /* border-radius: 2px; */
+      margin: .125rem;
+      height: 7rem;
+      text-decoration: none;
+      /* text-transform: capitalize; */
+    }
 
-a:hover, button:hover {
-  box-shadow: inset -4px -8px 16px #4BA1FF;
-}
+    a:hover, button:hover {
+      box-shadow: inset -4px -8px 16px #a6afe9;
+    }
 
     #items{
       display: flex;
@@ -82,17 +82,47 @@ a:hover, button:hover {
       object-fit: contain;
       max-width: 100%;
     }
+
+    .responsive-button {
+      display: inline-block;
+      width: 150px; /* Adjust width as needed */
+      height: auto;
+      text-align: center;
+      overflow-wrap: break-word;
+      border: none;
+      padding: 5px;
+      background: #dcdde5;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+
+      color: #333333;
+      background-color: #dcdde5;
+      border-radius: 3px;
+      box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.5), inset 0px -3px 6px -2px rgba(0, 0, 0, 0.3);
+    }
+
+      
+
+    .responsive-button img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
     
   </style>
 </head>
 <body>
 
-  <div id="world"></div>
+  <!-- <div id="world"></div> -->
 
 <main>
 
   
-  <button href="world/index.html">Page</button>
+  <!-- <button href="world/index.html" style="background-image: url(./images/fish-2.gif);">Page</button> -->
+  <a href="world/index.html" target="_blank" class="responsive-button">
+    <p>Page</p>
+    <img src="./images/microsoft_paint.webp">
+  </a>
   <br><br>
   
   <div id="items">
@@ -143,7 +173,16 @@ a:hover, button:hover {
               // Ensure file is a string and ends with '.html'
               if (typeof file === 'string' && file.endsWith('.html')) {
                 const fileName = file.replace('.html', '');
-                const button = $('<a></a>')                  .text(fileName)                                    .attr("href", fileName + ".html")
+                const button = $('<a></a>')                    
+                  .text(fileName)
+                  .attr("href", fileName + ".html")
+                  .attr("target", "_blank")
+                  .attr("class", "responsive-button")
+
+                const gif_part = $('<img>')
+                  .attr("src", ("./images/" + fileName + ".gif"))  
+                  
+                button.append(gif_part);
 
                 $('#items').append(button);
               } else {

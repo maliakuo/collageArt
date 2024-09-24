@@ -6,11 +6,46 @@ function randInt(min, max) {  return Math.floor(Math.random() * (max - min + 1) 
 
 function pick(arr) { return arr[(Math.random() * arr.length) | 0]; }
 
-function write(text) {
+// function write(text, id) {
+//   var SPEED = 80;
+//   var lines = text.split('\n');
+//   var lineIndex = 0;
+//   var $caption = $('#caption');
+//   var interval;
+
+//   // Clear any existing typewriter interval
+//   $caption.empty();
+//   clearInterval(interval);
+
+//   function typeLine() {
+//     var line = lines[lineIndex];
+//     var $lineSpan = $('<span></span>');
+//     $caption.append($lineSpan);
+
+//     var i = 0;
+//     interval = setInterval(function() {
+//       if (i < line.length) {
+//         $lineSpan.text($lineSpan.text() + line.charAt(i));
+//         i++;
+//       } else {
+//         clearInterval(interval);
+//         $caption.append('<br>');
+//         lineIndex++;
+//         if (lineIndex < lines.length) {
+//           setTimeout(typeLine, SPEED); // Wait a bit before typing the next line
+//         }
+//       }
+//     }, SPEED);
+//   }
+
+//   typeLine();
+// }
+
+function write(text, id) {
   var SPEED = 80;
   var lines = text.split('\n');
   var lineIndex = 0;
-  var $caption = $('#caption');
+  var $caption = $('#'+id);
   var interval;
 
   // Clear any existing typewriter interval
@@ -44,13 +79,13 @@ function write(text) {
 
 
 
-var clicked = false;
+// var clicked = false;
 
-$(document).one("click", function(){
+// $(document).one("click", function(){
   
-  $("#CLICK").remove();
+//   $("#CLICK").remove();
   
-});
+// });
 //$(document).click(function() {
 //  if (!clicked) {
 //    playAllAudio();
@@ -65,7 +100,7 @@ $(document).one("click", function(){
 //    });
 //}
 
-
+let blurb = "This piece explores collage's inherently collaborative nature. Collage acts as a conduit between disparate pieces of media, people, and times. Through web sockets, this site enables real-time collaboration, giving rise to unexpected results and interactions on this digital canvas. Take a seat and visit the site to begin."
 
 //
 let Connections = [];
@@ -74,6 +109,14 @@ socket.on('connectionsUpdate', function(connections) {
     console.log("update", connections);
 //  updateConnections(connections);
   // handle
+  if (connections.length == 0) {
+    write(blurb, "caption");
+    write("www.hereiam.com", "site_link");
+  } else {
+    $('#caption').find('span').remove()
+    $('#site_link').find('span').remove()
+
+  }
   Connections = connections;
   
   connections.forEach(conn => {  
@@ -214,7 +257,7 @@ function makeDiv(conn){
 
 
 $(document).ready(function(){
-  write("A new world waits.");
+  // write("A new world waits.");
   // console.log("here i am");
   
   socket.on('connect', function() {

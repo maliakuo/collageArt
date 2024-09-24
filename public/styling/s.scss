@@ -11,8 +11,15 @@
 
 // $serif: "Editorial New";
 
+
+@font-face { font-family: "source-code"; 
+  src: url("SourceCodePro-VariableFont_wght.ttf"); } 
+
+  $serif: "source-code";
+
+
 body{
-//   font-family: $serif;
+  font-family: $serif;
   letter-spacing: -1%;
 }
 
@@ -94,7 +101,7 @@ main{
     margin: 0;
     line-height: 140%;
     background: none; border: 0; 
-    // font-family: $serif;
+    font-family: $serif;
     cursor: pointer;
     background: #E7FF53;
     transition: box-shadow 200ms ease-in-out;
