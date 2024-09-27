@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>fire</title>
+  <script src="assets/socket.io.js"></script>
+  <script src="assets/jquery.min.js"></script>
+  <script src="assets/world.js"></script>
+  
+  <link rel="stylesheet" href="./styling/s.css" type="text/css" />
+  <link rel="stylesheet" href="./styling/objects.css" type="text/css" />
+  <style type="text/css">
+    
+    /* Adjust the effects of your object... */
+  
+  
+  </style>
+  
+<script type="text/javascript">
+var Identity = "fire";
+</script>
+</head>
+<body>
+<main>
+
+  
+ 
+  <!-- SOUND FILE -->
+  <audio loop>
+    <source src="sounds/mirror.wav">
+  </audio>
+  
+
+  <!-- IMAGE -->
+  <div id="object">
+    <img src="images/fire.gif">
+  </div>
+  
+  <!-- CONTROLS FOR MY OBJECT -->
+  <div id="actions">
+    
+    
+    <!--   Plays the sound for [value] seconds  -->
+    <button action="play" value="30">Fly</button>
+    <br>
+
+    <sup>Sound</sup>
+    <button action="fireAction" value="love">Love</button>
+    <button action="fireAction" value="write">Write</button>
+    <button action="fireAction" value="cry">Cry</button>
+    <button action="fireAction" value="love">Happy</button>
+    <button action="fireAction" value="anger">Anger</button>
+
+
+    <!--   Adjusts the tempo/speed  -->
+    <sup>Speed</sup>
+    <button action="tempo" value="-0.05">Slow</button>
+    <button action="tempo" value="+0.05">Speed</button>
+    <button action="preservePitch">Preserve Pitch</button>
+
+    
+    <!--   Adjusts visuals  -->
+    <sup>Look</sup>
+    <button action="grow" value="0.1">Grow</button>
+    <button action="shrink" value="0.1">Shrink</button>
+
+
+    <br>
+
+    <!--   Adjusts visuals  -->
+    <sup>Layering</sup>
+    <button action="front">Bring to Front</button>
+    <button action="back">Send to Back</button>
+
+    
+    <br>
+    
+    <!--  Volume slider  -->
+    <input type="range" id="volume" min="0" max="1" step="0.05" value="0.7"> <span volume>1</span>
+    
+    <br>
+
+    <!--   Adjusts visuals  -->
+    <sup>Move Left to Right</sup>
+    <input type="range" id="left" min="0" max="100" step="1" value="50"> <span left>50</span></p>
+    <sup>Move Up to Down</sup>
+    <input type="range" id="right" min="0" max="100" step="1" value="50"> <span right>50</span></p>
+  </div>
+  
+  
+  
+  <div class="caption"></div>
+
+</main>
+  
+
+<!--  MODIFY THE OBJECT HERE... -->
+<script type="text/javascript">
+// Specify range of where object can appear, from 0(%) to 100(%)
+let LeftMin = 0; let LeftMax = 95;
+let TopMin = 40; let TopMax = 90;
+
+  
+var Actions = {
+  "play": function(seconds){
+    // Play for N seconds
+      $("audio")[0].play();
+    
+    setTimeout(function(){
+      $("audio")[0].pause();
+        updateAudio();
+    }, parseFloat(seconds) * 1000);
+    
+  },
+  "playNtimes": function(times){
+    // Get the duration of the object and play it X times
+    let seconds = $("audio")[0].duration * times;
+    Actions.play(seconds);
+  },
+  
+  "tempo": function(intensity){
+    let currentRate = $("audio")[0].playbackRate;    
+    $("audio")[0].playbackRate = currentRate + parseFloat(intensity);
+  },
+  // Preserve the pitch, toggles between true or false
+  "preservePitch": function(){
+    let preserves = $("audio")[0].preservesPitch;    
+    $("audio")[0].preservesPitch = !preserves;
+  },
+  
+  
+  // Change the sound file
+  "changeAudio": function(song){
+    changeAudio(song);
+  },
+  // Change the image file
+  "changeImage": function(image){
+    changeImage(image);
+  },
+
+  "fireAction": function(action) {
+    if (action === "love") {
+      changeImage("images/fire_love.gif")
+    }
+    if (action === "write") {
+      changeImage("images/fire_write.gif")
+    }
+    if (action === "cry") {
+      changeImage("images/fire_cry.gif")
+    }
+    if (action === "anger") {
+      changeImage("images/fire_party.gif")
+    }
+    if (action === "happy") {
+      changeImage("images/fire.gif")
+    }
+  },
+
+  
+  // visuals
+  "grow": function(intensity){
+    
+    let currScale =  parseFloat(($('#object').attr('style') || '').match(/scale\s*\(([^)]+)\)/)?.[1]?.trim()) || 1;
+                                
+      console.log(intensity);
+                                
+    $("#object").css("transform", "scale(" + (currScale + parseFloat(intensity)) +")")
+    
+  },        
+  
+  "shrink": function(intensity){
+    
+    let currScale =  parseFloat(($('#object').attr('style') || '').match(/scale\s*\(([^)]+)\)/)?.[1]?.trim()) || 1;
+
+    console.log("currScale: ", currScale);
+                                
+      console.log(intensity);
+                                
+    $("#object").css("transform", "scale(" + (currScale - parseFloat(intensity)) +")")
+    
+  },         
+
+
+  "flip": function(){
+    var isFlipped = $("#object").data('flipped') === 'true';
+
+    if (isFlipped) {
+        $("#object").css('transform', 'scaleX(1)');
+        $("#object").data('flipped', 'false');
+    } else {
+        $("#object").css('transform', 'scaleX(-1)');
+        $("#object").data('flipped', 'true');
+    }
+  }, 
+
+  "front": function(){
+        $("#object").css('z-index', '100');
+  },
+
+  "back": function(){
+        $("#object").css('z-index', '-9999');
+  }
+  
+}
+  
+  
+  
+// What affects my object...
+    
+var Reactions = {
+  "raincloud": {
+    "play": function(){
+      // If it rains, mkae the fish go
+      Actions.play(12);
+      
+    }
+  },
+  "tide": {
+    "flip": function(){
+      // If the tides go, the fish also go
+      Actions.flip();
+    },
+    "grow": function(){
+      // If the tides go, the fish also go
+      Actions.grow(1.01); 
+    },
+  },
+}
+
+
+
+
+</script>
+<script src="object.js"></script>
+  
+</body>
+</html>

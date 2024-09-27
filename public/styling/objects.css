@@ -10,8 +10,8 @@
   
   main {
     outline: 1px solid red;
-    /* background-image: url(../images/gradient_glitch.png);
-    background-size: cover; */
+    background-image: url(../images/gradient_glitch.png);
+    background-size: cover;
   }
   
   #actions {
