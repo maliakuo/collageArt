@@ -1,5 +1,7 @@
 
 let audio = $("audio")[0];
+let positionLeft;
+let positionTop;
 
 // change a sound
 $("audio")[0].addEventListener("play", function(){
@@ -116,6 +118,83 @@ $(document).on("click", "#object", function(){
   
 });
 
+$(document).on("click", "#up", function(){
+  if (positionTop === 2) {
+    positionTop = 2;
+    console.log("i'm at my limit ahhhhhh");
+  } else {
+    positionTop = positionTop - 1;
+  }
+  console.log("positionTop: " + positionTop);
+
+  
+  updatePosition(null, positionTop)
+
+  socket.emit('sendData', {
+    position: {
+      left: positionLeft,
+      top: positionTop,
+    },
+  });
+});
+
+$(document).on("click", "#down", function(){
+  if (positionTop === 98) {
+    positionTop = 98;
+    console.log("i'm at my limit ahhhhhh");
+  } else {
+    positionTop = positionTop + 1;
+  }
+  console.log("positionTop: " + positionTop);
+  
+  updatePosition(null, positionTop)
+
+  socket.emit('sendData', {
+    position: {
+      left: positionLeft,
+      top: positionTop,
+    },
+  });
+});
+
+$(document).on("click", "#left", function(){
+  if (positionLeft === 2) {
+    positionLeft = 2;
+    console.log("i'm at my limit ahhhhhh");
+  } else {
+    positionLeft = positionLeft - 1;
+  }
+  console.log("positionLeft: " + positionLeft);
+  
+  updatePosition(positionLeft, null)
+
+  socket.emit('sendData', {
+    position: {
+      left: positionLeft,
+      top: positionTop,
+    },
+  });
+});
+
+$(document).on("click", "#right", function(){
+  if (positionLeft === 98) {
+    positionLeft = 98;
+    console.log("i'm at my limit ahhhhhh");
+  } else {
+    positionLeft = positionLeft + 1;
+  }
+  console.log("positionLeft: " + positionLeft);
+  
+  updatePosition(positionLeft, null)
+
+  socket.emit('sendData', {
+    position: {
+      left: positionLeft,
+      top: positionTop,
+    },
+  });
+});
+
 $(document).on("click", "[action]", function(){
 
   console.log("Performing an action...")
@@ -170,8 +249,8 @@ $(document).ready(function(){
 //  let imageSource = $('#object img').attr('src').replace('images/', '');
   let imageSource = $('#object img').attr('src');
   
-  let positionLeft = randInt(LeftMin, LeftMax);
-  let positionTop = randInt(TopMin, TopMax);
+  positionLeft = randInt(LeftMin, LeftMax);
+  positionTop = randInt(TopMin, TopMax);
 
   let volDefault = $("#volume").val();
    $("audio")[0].volume = volDefault;

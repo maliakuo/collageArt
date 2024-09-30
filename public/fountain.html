@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>pencil</title>
+  <title>fountain</title>
   <script src="assets/socket.io.js"></script>
   <script src="assets/jquery.min.js"></script>
   <script src="assets/world.js"></script>
@@ -18,7 +18,7 @@
   </style>
   
 <script type="text/javascript">
-var Identity = "pencil";
+var Identity = "fountain";
 </script>
 </head>
 <body>
@@ -28,13 +28,13 @@ var Identity = "pencil";
  
   <!-- SOUND FILE -->
   <audio loop>
-    <source src="sounds/pencil.wav">
+    <source src="sounds/bling_star.wav">
   </audio>
   
 
   <!-- IMAGE -->
   <div id="object">
-    <img src="images/pencil.gif">
+    <img src="images/fountain.gif">
   </div>
   
   <!-- CONTROLS FOR MY OBJECT -->
@@ -42,7 +42,7 @@ var Identity = "pencil";
     
     
     <!--   Plays the sound for [value] seconds  -->
-    <button action="play" value="40">Swim</button>
+    <button action="play" value="4">Splash</button>
     <br>
 
 
@@ -57,6 +57,7 @@ var Identity = "pencil";
     <sup>Look</sup>
     <button action="grow" value="0.1">Grow</button>
     <button action="shrink" value="0.1">Shrink</button>
+    <button action="changeHue">Change Hue</button>
 
     <br>
 
@@ -69,6 +70,7 @@ var Identity = "pencil";
     <br>
     
     <!--  Volume slider  -->
+    <sup>Volume</sup>
     <input type="range" id="volume" min="0" max="1" step="0.05" value="0.7"> <span volume>1</span>
     
     <br>
@@ -78,6 +80,7 @@ var Identity = "pencil";
     <input type="range" id="left" min="0" max="100" step="1" value="50"> <span left>50</span></p>
     <sup>Move Up to Down</sup>
     <input type="range" id="right" min="0" max="100" step="1" value="50"> <span right>50</span></p>
+    
   </div>
   
   
@@ -141,7 +144,7 @@ var Actions = {
                                 
     $("#object").css("transform", "scale(" + (currScale + parseFloat(intensity)) +")")
     
-  },   
+  },         
   "shrink": function(intensity){
     
     let currScale =  parseFloat(($('#object').attr('style') || '').match(/scale\s*\(([^)]+)\)/)?.[1]?.trim()) || 1;
@@ -152,7 +155,7 @@ var Actions = {
                                 
     $("#object").css("transform", "scale(" + (currScale - parseFloat(intensity)) +")")
     
-  },                                
+  },                         
   "flip": function(){
     var isFlipped = $("#object").data('flipped') === 'true';
 
@@ -171,7 +174,12 @@ var Actions = {
 
   "back": function(){
         $("#object").css('z-index', '-9999');
-  }
+  }, 
+  // Change the color of the object
+  "changeHue": function(intensity){
+    // Changes the color of the object
+    $("#object").css(`filter`, `hue-rotate(${randInt(0,300)}deg)`);
+  },
   
 }
   

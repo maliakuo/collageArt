@@ -175,13 +175,14 @@
               if (typeof file === 'string' && file.endsWith('.html')) {
                 const fileName = file.replace('.html', '');
                 const button = $('<a></a>')                    
-                  .text(fileName)
+                  // .text(fileName)
                   .attr("href", fileName + ".html")
                   .attr("target", "_blank")
                   .attr("class", "responsive-button")
 
                 const gif_part = $('<img>')
                   .attr("src", ("./images/" + fileName + ".gif"))  
+                  .attr("alt", fileName);
                   
                 button.append(gif_part);
 
