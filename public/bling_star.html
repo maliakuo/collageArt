@@ -73,7 +73,11 @@ var Identity = "bling_star";
     </div>
         
     <!--  Volume slider  -->
-    <input type="range" id="volume" min="0" max="1" step="0.05" value="0.7"> <span volume>1</span>
+    <!--  Volume slider  -->
+    <div class="volume_slider">
+        <span>volume</span>
+        <input type="range" id="volume" min="0" max="1" step="0.05" value="0.7"> <span volume>1</span>
+    </div>
     
     <!--   Adjusts visuals  -->
     <!-- <sup>Move Left to Right</sup>
@@ -161,12 +165,16 @@ var Actions = {
   
   // visuals
   "grow": function(intensity){
+
+    console.log("rotateDeg: ", rotateDeg);
     
     let currScale =  parseFloat(($('#object').attr('style') || '').match(/scale\s*\(([^)]+)\)/)?.[1]?.trim()) || 1;
+
+    console.log("currScale: " + currScale);
                                 
       console.log(intensity);
                                 
-    $("#object").css("transform", "scale(" + (currScale + parseFloat(intensity)) +")")
+    $("#object").css("transform", "scale(" + (currScale + parseFloat(intensity)) +")" + " rotate(" + (rotateDeg) + "deg)")
     
   },        
   
@@ -178,7 +186,8 @@ var Actions = {
                                 
       console.log(intensity);
                                 
-    $("#object").css("transform", "scale(" + (currScale - parseFloat(intensity)) +")")
+    $("#object").css("transform", "scale(" + (currScale - parseFloat(intensity)) +")"  + " rotate(" + (rotateDeg) + "deg)")
+
     
   },   
 
@@ -204,7 +213,11 @@ var Actions = {
   },
   "rotate": function(intensity){
     // Rotates the object
-    $("#object").css("transform", "rotate(" + (rotateDeg + 45) + "deg")
+    let currScale =  parseFloat(($('#object').attr('style') || '').match(/scale\s*\(([^)]+)\)/)?.[1]?.trim()) || 1;
+    console.log("currScale: " + currScale );
+    // $("#object").css("transform", "rotate(" + (rotateDeg + 45) + "deg)")
+    $("#object").css("transform", "scale(" + (currScale) +")"  + " rotate(" + (rotateDeg + 45) + "deg)")
+    // $("#object").css("transform", "scale(" + (currScale) +")")
     rotateDeg = rotateDeg + 45;
   },
 
