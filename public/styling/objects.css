@@ -63,11 +63,11 @@
     #actions {
       transform: scale(0.8);
       margin-bottom: -0.25rem;
-      padding: 0;
+      padding: 3em;
     }
-    #actions #volume, #actions [volume] {
+    /* #actions #volume, #actions [volume] {
       display: none;
-    }
+    } */
   }
 
   .button_container {
