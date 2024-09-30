@@ -23,15 +23,12 @@ var Identity = "bling_star";
 </head>
 <body>
 <main>
-
-  
- 
   <!-- SOUND FILE -->
   <audio loop>
     <source src="sounds/bling_star.wav">
   </audio>
   
-
+  
   <!-- IMAGE -->
   <div class="object_container">
     <div id="object">
@@ -73,18 +70,11 @@ var Identity = "bling_star";
     </div>
         
     <!--  Volume slider  -->
-    <!--  Volume slider  -->
     <div class="volume_slider">
         <span>volume</span>
         <input type="range" id="volume" min="0" max="1" step="0.05" value="0.7"> <span volume>1</span>
     </div>
-    
-    <!--   Adjusts visuals  -->
-    <!-- <sup>Move Left to Right</sup>
-    <input type="range" id="left" min="0" max="100" step="1" value="50"> <span left>50</span></p>
-    <sup>Move Up to Down</sup>
-    <input type="range" id="right" min="0" max="100" step="1" value="50"> <span right>50</span></p>
-  </div> -->
+
   <div class="controller_div">
     <div>
       <button action="move" id="up">
@@ -215,9 +205,7 @@ var Actions = {
     // Rotates the object
     let currScale =  parseFloat(($('#object').attr('style') || '').match(/scale\s*\(([^)]+)\)/)?.[1]?.trim()) || 1;
     console.log("currScale: " + currScale );
-    // $("#object").css("transform", "rotate(" + (rotateDeg + 45) + "deg)")
     $("#object").css("transform", "scale(" + (currScale) +")"  + " rotate(" + (rotateDeg + 45) + "deg)")
-    // $("#object").css("transform", "scale(" + (currScale) +")")
     rotateDeg = rotateDeg + 45;
   },
 

@@ -12,18 +12,16 @@
   <link rel="stylesheet" href="./styling/objects.css" type="text/css" />
   <style type="text/css">
     
-    /* Adjust the look of your object, if you like... */
+    /* Adjust the effects of your object... */
   
   
   </style>
-
-  <!--  Update this and give your object a name -->
-  <script type="text/javascript">
-  var Identity = "silly_fish";
-  </script>
-</head>
   
-<!-- Content written out in the page  -->
+  <!--  Update this and give your object a name -->
+<script type="text/javascript">
+  var Identity = "silly_fish";
+</script>
+</head>
 <body>
 <main>
 
@@ -36,44 +34,78 @@
   
 
   <!-- IMAGE -->
-  <div id="object">
-    <img src="images/silly_fish.gif">
+  <div class="object_container">
+    <div id="object">
+      <img src="images/silly_fish.gif">
+    </div>
   </div>
+  
   
   <!-- CONTROLS FOR MY OBJECT -->
   <div id="actions">
     
     <!--   Plays the sound for value seconds  -->
-    <sup>Play</sup>
-    <button action="play" value="40">Float</button>
-    <button action="playNtimes" value="2">Swim</button>
-<br>    
+    <div class="button_container">
+      <button action="play" value="40">Swim</button>
+      <button action="playNtimes" value="2">Float</button>  
+    </div>
+    
 
     <!--   Adjusts the tempo/speed  -->
-    <sup>Speed</sup>
-    <button action="tempo" value="-0.05">Slow</button>
-    <button action="tempo" value="+0.05">Speed</button>
-    <button action="preservePitch">Preserve Pitch</button>
+    <!-- <sup>Speed</sup> -->
+    <div class="button_container">
+      <button action="tempo" value="-0.05">Slow</button>
+      <button action="tempo" value="+0.05">Speed</button>
+      <button action="preservePitch">Preserve Pitch</button>   
+    </div>
     
-    <sup>Look</sup>
-    <button action="grow" value="0.1">Grow</button>
-    <button action="shrink" value="0.1">Shrink</button>
-
-    <button action="flip">Flip</button>
-
-
+    <!--   Adjusts visuals  -->
+    <!-- <sup>Look</sup> -->
+    <div class="button_container">
+        <button action="rotate">Rotate</button>
+        <button action="changeHue">Change Hue</button>
+      <button action="grow" value="0.1">Grow</button>
+      <button action="shrink" value="0.1">Shrink</button>
+  
+    </div>
+    
+    <!--   Adjusts visuals  -->
+    <!-- <sup>Layering</sup> -->
+    <div class="button_container">
+      <button action="front">Bring to Front</button>
+      <button action="back">Send to Back</button>
+    </div>
+        
     <!--  Volume slider  -->
-    <input type="range" id="volume" min="0" max="1" step="0.05" value="0.7"> <span volume>1</span>
+    <div class="volume_slider">
+      <span>volume</span>
+      <input type="range" id="volume" min="0" max="1" step="0.05" value="0.7"> <span volume>1</span>
+    </div>
+    
+  <div class="controller_div">
+    <div>
+      <button action="move" id="up">
+        <img class="responsive_img" src="./images/uparrow.png">
+      </button>
+    </div>
+    <div class="middle">
+      <button action="move" id="left">
+        <img class="responsive_img" src="./images/leftarrow.png">
+      </button>
+      <button class="rotated">
 
-    <br>
-    <sup>Move Left to Right</sup>
-    <input type="range" id="left" min="0" max="100" step="1" value="50"> <span left>50</span></p>
-    <sup>Move Up to Down</sup>
-    <input type="range" id="right" min="0" max="100" step="1" value="50"> <span right>50</span></p>
-
-  </div>
-  
-  
+      </button>
+      <button action="move" id="right">
+        <img class="responsive_img" src="./images/right_arrow.png">
+      </button>
+    </div>
+    <div>
+      <button action="move" id="down">
+        <img class="responsive_img" src="./images/downarrow.png">
+      </button>
+    </div>
+    
+  </div>  
   
   <div class="caption"></div>
 
@@ -82,10 +114,11 @@
 
 <!--  MODIFY THE OBJECT HERE... -->
 <script type="text/javascript">
+let rotateDeg = 0;
 // Specify range of where object can appear, from 0(%) to 100(%)
 let LeftMin = 0; let LeftMax = 95;
-let TopMin = 78; let TopMax = 82;
-  
+let TopMin = 10; let TopMax = 90;
+
   
 var Actions = {
   "play": function(seconds){
@@ -100,23 +133,15 @@ var Actions = {
   },
   "playNtimes": function(times){
     // Get the duration of the object and play it X times
-    let seconds = $("audio")[0].duration * 1000 * times;
-    
-    $("audio")[0].play();
-    
-    setTimeout(function(){
-      $("audio")[0].pause();
-        updateAudio();
-    }, parseFloat(seconds) * 1000);
-    
+    let seconds = $("audio")[0].duration * times;
+    Actions.play(seconds);
   },
   
-  // Change the speed
   "tempo": function(intensity){
     let currentRate = $("audio")[0].playbackRate;    
     $("audio")[0].playbackRate = currentRate + parseFloat(intensity);
   },
-  // Preserve the pitch, toggles 
+  // Preserve the pitch, toggles between true or false
   "preservePitch": function(){
     let preserves = $("audio")[0].preservesPitch;    
     $("audio")[0].preservesPitch = !preserves;
@@ -140,9 +165,10 @@ var Actions = {
                                 
       console.log(intensity);
                                 
-    $("#object").css("transform", "scale(" + (currScale + parseFloat(intensity)) +")")
+      $("#object").css("transform", "scale(" + (currScale + parseFloat(intensity)) +")" + " rotate(" + (rotateDeg) + "deg)")
     
-  },
+  },        
+  
   "shrink": function(intensity){
     
     let currScale =  parseFloat(($('#object').attr('style') || '').match(/scale\s*\(([^)]+)\)/)?.[1]?.trim()) || 1;
@@ -151,10 +177,11 @@ var Actions = {
                                 
       console.log(intensity);
                                 
-    $("#object").css("transform", "scale(" + (currScale - parseFloat(intensity)) +")")
+      $("#object").css("transform", "scale(" + (currScale - parseFloat(intensity)) +")"  + " rotate(" + (rotateDeg) + "deg)")
     
-  },         
-                                
+  },   
+
+
   "flip": function(){
     var isFlipped = $("#object").data('flipped') === 'true';
 
@@ -165,18 +192,26 @@ var Actions = {
         $("#object").css('transform', 'scaleX(-1)');
         $("#object").data('flipped', 'true');
     }
-  },
+  }, 
 
   "front": function(){
-        let newZIndex = zIndex + 1;
-        zIndex = newZIndex;
-        $("#object").css('z-index', zIndex);
+        $("#object").css('z-index', '100');
   },
 
   "back": function(){
-        let newZIndex = zIndex - 1;
-        zIndex = newZIndex;
-        $("#object").css('z-index', zIndex);
+        $("#object").css('z-index', '-9999');
+  },
+  "rotate": function(intensity){
+    // Rotates the object
+    let currScale =  parseFloat(($('#object').attr('style') || '').match(/scale\s*\(([^)]+)\)/)?.[1]?.trim()) || 1;
+    $("#object").css("transform", "scale(" + (currScale) +")"  + " rotate(" + (rotateDeg + 45) + "deg)")
+    rotateDeg = rotateDeg + 45;
+  },
+
+  // Change the color of the object
+  "changeHue": function(intensity){
+    // Changes the color of the object
+    $("#object").css(`filter`, `hue-rotate(${randInt(0,300)}deg)`);
   }
   
 }
@@ -186,20 +221,23 @@ var Actions = {
 // What affects my object...
     
 var Reactions = {
-  "angel": {
+  "raincloud": {
     "play": function(){
-      // If the angel plays, play for 3 seconds
-      Actions.play(3);
+      // If it rains, mkae the fish go
+      Actions.play(12);
       
     }
   },
-  "raincloud": {
-    "play": function(){
-      // If the rain plays, grow
-      Actions.grow(0.05);
-      
-    }
-  }
+  "tide": {
+    "flip": function(){
+      // If the tides go, the fish also go
+      Actions.flip();
+    },
+    "grow": function(){
+      // If the tides go, the fish also go
+      Actions.grow(1.01); 
+    },
+  },
 }
 
 

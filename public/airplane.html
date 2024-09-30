@@ -171,7 +171,7 @@ var Actions = {
                                 
       console.log(intensity);
                                 
-    $("#object").css("transform", "scale(" + (currScale + parseFloat(intensity)) +")")
+      $("#object").css("transform", "scale(" + (currScale + parseFloat(intensity)) +")" + " rotate(" + (rotateDeg) + "deg)")
     
   },        
   
@@ -183,7 +183,7 @@ var Actions = {
                                 
       console.log(intensity);
                                 
-    $("#object").css("transform", "scale(" + (currScale - parseFloat(intensity)) +")")
+      $("#object").css("transform", "scale(" + (currScale - parseFloat(intensity)) +")"  + " rotate(" + (rotateDeg) + "deg)")
     
   },   
 
@@ -209,7 +209,8 @@ var Actions = {
   },
   "rotate": function(intensity){
     // Rotates the object
-    $("#object").css("transform", "rotate(" + (rotateDeg + 45) + "deg")
+    let currScale =  parseFloat(($('#object').attr('style') || '').match(/scale\s*\(([^)]+)\)/)?.[1]?.trim()) || 1;
+    $("#object").css("transform", "scale(" + (currScale) +")"  + " rotate(" + (rotateDeg + 45) + "deg)")
     rotateDeg = rotateDeg + 45;
   },
 

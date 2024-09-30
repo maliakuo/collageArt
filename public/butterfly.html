@@ -33,9 +33,12 @@ var Identity = "butterfly";
   
 
   <!-- IMAGE -->
-  <div id="object">
-    <img src="images/butterfly.gif">
+  <div class="object_container">
+    <div id="object">
+      <img src="images/butterfly.gif">
+    </div>
   </div>
+  
   
   <!-- CONTROLS FOR MY OBJECT -->
   <div id="actions">
@@ -47,40 +50,61 @@ var Identity = "butterfly";
 
 
     <!--   Adjusts the tempo/speed  -->
-    <sup>Speed</sup>
-    <button action="tempo" value="-0.05">Slow</button>
-    <button action="tempo" value="+0.05">Speed</button>
-    <button action="preservePitch">Preserve Pitch</button>
-
+    <!-- <sup>Speed</sup> -->
+    <div class="button_container">
+      <button action="tempo" value="-0.05">Slow</button>
+      <button action="tempo" value="+0.05">Speed</button>
+      <button action="preservePitch">Preserve Pitch</button>   
+    </div>
     
     <!--   Adjusts visuals  -->
-    <sup>Look</sup>
-    <button action="grow" value="0.1">Grow</button>
-    <button action="shrink" value="0.1">Shrink</button>
-
-
-    <br>
-
-    <!--   Adjusts visuals  -->
-    <sup>Layering</sup>
-    <button action="front">Bring to Front</button>
-    <button action="back">Send to Back</button>
-
-    
-    <br>
-    
-    <!--  Volume slider  -->
-    <input type="range" id="volume" min="0" max="1" step="0.05" value="0.7"> <span volume>1</span>
-    
-    <br>
-
-    <!--   Adjusts visuals  -->
-    <sup>Move Left to Right</sup>
-    <input type="range" id="left" min="0" max="100" step="1" value="50"> <span left>50</span></p>
-    <sup>Move Up to Down</sup>
-    <input type="range" id="right" min="0" max="100" step="1" value="50"> <span right>50</span></p>
-  </div>
+    <!-- <sup>Look</sup> -->
+    <div class="button_container">
+        <button action="rotate">Rotate</button>
+        <button action="changeHue">Change Hue</button>
+      <button action="grow" value="0.1">Grow</button>
+      <button action="shrink" value="0.1">Shrink</button>
   
+    </div>
+    
+    <!--   Adjusts visuals  -->
+    <!-- <sup>Layering</sup> -->
+    <div class="button_container">
+      <button action="front">Bring to Front</button>
+      <button action="back">Send to Back</button>
+    </div>
+        
+    <!--  Volume slider  -->
+    <div class="volume_slider">
+      <span>volume</span>
+      <input type="range" id="volume" min="0" max="1" step="0.05" value="0.7"> <span volume>1</span>
+    </div>
+    
+  <div class="controller_div">
+    <div>
+      <button action="move" id="up">
+        <img class="responsive_img" src="./images/uparrow.png">
+      </button>
+    </div>
+    <div class="middle">
+      <button action="move" id="left">
+        <img class="responsive_img" src="./images/leftarrow.png">
+      </button>
+      <button class="rotated">
+
+      </button>
+      <button action="move" id="right">
+        <img class="responsive_img" src="./images/right_arrow.png">
+      </button>
+    </div>
+    <div>
+      <button action="move" id="down">
+        <img class="responsive_img" src="./images/downarrow.png">
+      </button>
+    </div>
+    
+  </div>
+  </div>
   
   
   <div class="caption"></div>
@@ -90,6 +114,7 @@ var Identity = "butterfly";
 
 <!--  MODIFY THE OBJECT HERE... -->
 <script type="text/javascript">
+let rotateDeg = 0;
 // Specify range of where object can appear, from 0(%) to 100(%)
 let LeftMin = 0; let LeftMax = 95;
 let TopMin = 40; let TopMax = 90;
@@ -140,7 +165,7 @@ var Actions = {
                                 
       console.log(intensity);
                                 
-    $("#object").css("transform", "scale(" + (currScale + parseFloat(intensity)) +")")
+      $("#object").css("transform", "scale(" + (currScale + parseFloat(intensity)) +")" + " rotate(" + (rotateDeg) + "deg)")
     
   },        
   
@@ -152,9 +177,9 @@ var Actions = {
                                 
       console.log(intensity);
                                 
-    $("#object").css("transform", "scale(" + (currScale - parseFloat(intensity)) +")")
+      $("#object").css("transform", "scale(" + (currScale - parseFloat(intensity)) +")"  + " rotate(" + (rotateDeg) + "deg)")
     
-  },         
+  },   
 
 
   "flip": function(){
@@ -175,6 +200,18 @@ var Actions = {
 
   "back": function(){
         $("#object").css('z-index', '-9999');
+  },
+  "rotate": function(intensity){
+    // Rotates the object
+    let currScale =  parseFloat(($('#object').attr('style') || '').match(/scale\s*\(([^)]+)\)/)?.[1]?.trim()) || 1;
+    $("#object").css("transform", "scale(" + (currScale) +")"  + " rotate(" + (rotateDeg + 45) + "deg)")
+    rotateDeg = rotateDeg + 45;
+  },
+
+  // Change the color of the object
+  "changeHue": function(intensity){
+    // Changes the color of the object
+    $("#object").css(`filter`, `hue-rotate(${randInt(0,300)}deg)`);
   }
   
 }
