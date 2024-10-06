@@ -44,78 +44,78 @@ var Identity = "fire";
   <div id="actions">
     <div class="action_container">
       <!--   Plays the sound for [value] seconds  -->
-    <button action="play" value="30">Fly</button>
+      <button action="play" value="30">Fly</button>
 
-    <!-- <sup>Sound</sup> -->
-    <div class="button_container">
-      <button action="fireAction" value="love">Love</button>
-      <button action="fireAction" value="write">Write</button>
-      <button action="fireAction" value="cry">Cry</button>
-      <button action="fireAction" value="love">Happy</button>
-      <button action="fireAction" value="anger">Anger</button>
-    </div>
-    
-
-
-    <!--   Adjusts the tempo/speed  -->
-    <!-- <sup>Speed</sup> -->
-    <div class="button_container">
-      <button action="tempo" value="-0.05">Slow</button>
-      <button action="tempo" value="+0.05">Speed</button>
-      <button action="preservePitch">Preserve Pitch</button>   
-    </div>
-
-    
-    <!--   Adjusts visuals  -->
-    <!-- <sup>Look</sup> -->
-    <div class="button_container">
-      <button action="rotate">Rotate</button>
-      <button action="changeHue">Change Hue</button>
-      <button action="grow" value="0.1">Grow</button>
-      <button action="shrink" value="0.1">Shrink</button>
-  </div>
-
-    <!--   Adjusts visuals  -->
-    <!-- <sup>Layering</sup> -->
-    <div class="button_container">
-      <button action="front">Bring to Front</button>
-      <button action="back">Send to Back</button>
-    </div>
-
-    
-    <!--  Volume slider  -->
-    <div class="volume_slider">
-      <span>volume</span>
-      <input type="range" id="volume" min="0" max="1" step="0.05" value="0.7"> <span volume>1</span>
-    </div>
-    
-    <!-- <br> -->
-
-    <!--   Adjusts visuals  -->
-    <div class="controller_div">
-      <div>
-        <button action="move" id="up">
-          <img class="responsive_img" src="./images/uparrow.png">
-        </button>
-      </div>
-      <div class="middle">
-        <button action="move" id="left">
-          <img class="responsive_img" src="./images/leftarrow.png">
-        </button>
-        <button class="rotated">
-  
-        </button>
-        <button action="move" id="right">
-          <img class="responsive_img" src="./images/right_arrow.png">
-        </button>
-      </div>
-      <div>
-        <button action="move" id="down">
-          <img class="responsive_img" src="./images/downarrow.png">
-        </button>
+      <!-- <sup>Sound</sup> -->
+      <div class="button_container">
+        <button action="fireAction" value="love">Love</button>
+        <button action="fireAction" value="write">Write</button>
+        <button action="fireAction" value="cry">Cry</button>
+        <button action="fireAction" value="love">Happy</button>
+        <button action="fireAction" value="anger">Anger</button>
       </div>
       
+
+
+      <!--   Adjusts the tempo/speed  -->
+      <!-- <sup>Speed</sup> -->
+      <div class="button_container">
+        <button action="tempo" value="-0.05">Slow</button>
+        <button action="tempo" value="+0.05">Speed</button>
+        <button action="preservePitch">Preserve Pitch</button>   
+      </div>
+
+      
+      <!--   Adjusts visuals  -->
+      <!-- <sup>Look</sup> -->
+      <div class="button_container">
+        <button action="rotate">Rotate</button>
+        <button action="changeHue">Change Hue</button>
+        <button action="grow" value="0.1">Grow</button>
+        <button action="shrink" value="0.1">Shrink</button>
     </div>
+
+      <!--   Adjusts visuals  -->
+      <!-- <sup>Layering</sup> -->
+      <div class="button_container">
+        <button action="front">Bring to Front</button>
+        <button action="back">Send to Back</button>
+      </div>
+
+      
+      <!--  Volume slider  -->
+      <div class="volume_slider">
+        <span>volume</span>
+        <input type="range" id="volume" min="0" max="1" step="0.05" value="0.7"> <span volume>1</span>
+      </div>
+      
+      <!-- <br> -->
+
+      <!--   Adjusts visuals  -->
+      <div class="controller_div">
+        <div>
+          <button action="move" id="up">
+            <img class="responsive_img" src="./images/uparrow.png">
+          </button>
+        </div>
+        <div class="middle">
+          <button action="move" id="left">
+            <img class="responsive_img" src="./images/leftarrow.png">
+          </button>
+          <button class="rotated">
+    
+          </button>
+          <button action="move" id="right">
+            <img class="responsive_img" src="./images/right_arrow.png">
+          </button>
+        </div>
+        <div>
+          <button action="move" id="down">
+            <img class="responsive_img" src="./images/downarrow.png">
+          </button>
+        </div>
+        
+      </div>
   
     </div>
   </div>

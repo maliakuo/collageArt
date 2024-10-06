@@ -1,6 +1,10 @@
 @font-face { font-family: "pixel"; 
   src: url("PixelifySans-Regular.ttf"); } 
 
+body {
+  touch-action: manipulation;
+}
+
 #title h1 {
     font-weight: normal;
     letter-spacing: -0.5px;
