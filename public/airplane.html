@@ -28,7 +28,7 @@ var Identity = "airplane";
  
   <!-- SOUND FILE -->
   <audio loop>
-    <source src="sounds/mirror.wav">
+    <source src="sounds/airplane.mp3">
   </audio>
   
 
@@ -46,7 +46,7 @@ var Identity = "airplane";
     
     
     <!--   Plays the sound for [value] seconds  -->
-    <button action="play" value="30">Fly</button>
+    <button action="play" value="50">Fly</button>
     <!-- <br> -->
 
 
@@ -229,11 +229,13 @@ var Actions = {
 // What affects my object...
     
 var Reactions = {
-  "raincloud": {
-    "play": function(){
+  "dragon": {
+    "grow": function(){
       // If it rains, mkae the fish go
-      Actions.play(12);
-      
+      Actions.grow(1.01);
+    },
+    "changeHue": function() {
+      Actions.changeHue();
     }
   },
   "tide": {

@@ -28,7 +28,7 @@ var Identity = "bottle";
  
   <!-- SOUND FILE -->
   <audio loop>
-    <source src="sounds/mirror.wav">
+    <source src="sounds/bottle.mp3">
   </audio>
   
 
@@ -46,7 +46,7 @@ var Identity = "bottle";
     
     
     <!--   Plays the sound for [value] seconds  -->
-    <button action="play" value="30">Float</button>
+    <button action="play" value="14">Float</button>
     <!-- <br> -->
 
 
@@ -229,10 +229,10 @@ var Actions = {
 // What affects my object...
     
 var Reactions = {
-  "raincloud": {
-    "play": function(){
+  "dragon": {
+    "grow": function(){
       // If it rains, mkae the fish go
-      Actions.play(12);
+      Actions.grow(1.01);
       
     }
   },
