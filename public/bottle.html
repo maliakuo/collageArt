@@ -229,17 +229,17 @@ var Actions = {
 // What affects my object...
     
 var Reactions = {
-  "dragon": {
-    "grow": function(){
+  "silly_fish": {
+    "rotate": function(){
       // If it rains, mkae the fish go
-      Actions.grow(1.01);
+      Actions.rotate();
       
     }
   },
   "tide": {
-    "flip": function(){
+    "changeHue": function(){
       // If the tides go, the fish also go
-      Actions.flip();
+      Actions.changeHue();
     },
     "grow": function(){
       // If the tides go, the fish also go

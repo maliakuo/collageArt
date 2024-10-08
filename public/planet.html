@@ -219,21 +219,19 @@ var Actions = {
 // What affects my object...
     
 var Reactions = {
-  "raincloud": {
+  "supernova": {
     "play": function(){
-      // If it rains, mkae the fish go
+    // If it rains, mkae the fish go
       Actions.play(12);
-      
-    }
-  },
-  "tide": {
-    "flip": function(){
-      // If the tides go, the fish also go
-      Actions.flip();
     },
-    "grow": function(){
-      // If the tides go, the fish also go
-      Actions.grow(1.01); 
+    "grow": function() {
+        Actions.grow(1.01);
+    },
+    "shrink": function() {
+        Actions.shrink(0.95);
+    },
+    "rotate": function() {
+        Actions.rotate();
     },
   },
 }
