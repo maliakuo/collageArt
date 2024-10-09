@@ -237,7 +237,6 @@ function makeDiv(conn){
   dAudio = $(`<audio src='${ conn.audio.startsWith("http://") || conn.audio.startsWith("https://") ? conn.audio : "../" + conn.audio}'>`)
     .prop('autoplay', false).prop('loop', true);
 
-
   $(dAudio).appendTo(d);
 
     dAudio[0].playbackRate = conn.audioState.playbackRate;
