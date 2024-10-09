@@ -119,11 +119,11 @@ $(document).on("click", "#object", function(){
 });
 
 $(document).on("click", "#up", function(){
-  if (positionTop === 2) {
+  if (positionTop <= 2) {
     positionTop = 2;
     console.log("i'm at my limit ahhhhhh");
   } else {
-    positionTop = positionTop - 1;
+    positionTop = positionTop - 2;
   }
   console.log("positionTop: " + positionTop);
 
@@ -139,11 +139,11 @@ $(document).on("click", "#up", function(){
 });
 
 $(document).on("click", "#down", function(){
-  if (positionTop === 98) {
+  if (positionTop >= 98) {
     positionTop = 98;
     console.log("i'm at my limit ahhhhhh");
   } else {
-    positionTop = positionTop + 1;
+    positionTop = positionTop + 2;
   }
   console.log("positionTop: " + positionTop);
   
@@ -158,11 +158,11 @@ $(document).on("click", "#down", function(){
 });
 
 $(document).on("click", "#left", function(){
-  if (positionLeft === 2) {
+  if (positionLeft <= 2) {
     positionLeft = 2;
     console.log("i'm at my limit ahhhhhh");
   } else {
-    positionLeft = positionLeft - 1;
+    positionLeft = positionLeft - 2;
   }
   console.log("positionLeft: " + positionLeft);
   
@@ -177,11 +177,11 @@ $(document).on("click", "#left", function(){
 });
 
 $(document).on("click", "#right", function(){
-  if (positionLeft === 98) {
+  if (positionLeft >= 98) {
     positionLeft = 98;
     console.log("i'm at my limit ahhhhhh");
   } else {
-    positionLeft = positionLeft + 1;
+    positionLeft = positionLeft + 2;
   }
   console.log("positionLeft: " + positionLeft);
   

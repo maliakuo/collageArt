@@ -12,8 +12,18 @@
       @font-face { font-family: pixel; 
       src: url("styling/PixelifySans-Regular.ttf"); } 
 
-    * {
+      @font-face { font-family: source-code; 
+        src: url("styling/SourceCodePro-VariableFont_wght.ttf"); } 
+
+    /* * {
       font-family: pixel;
+    } */
+
+    #title_header {
+      /* background: #e4fcff; */
+      color: #000000;
+      font-size: 3rem;
+      font-family: source-code;
     }
     
     body{
@@ -120,6 +130,13 @@
 
   
   <!-- <button href="world/index.html" style="background-image: url(./images/fish-2.gif);">Page</button> -->
+  <div id="title_header">
+    <p>Here I Am</p>
+  </div>
+  <div>
+    <p>Click on any of the sprites below to add to the on-screen collage.</p>
+  </div>
+  <br><br>
   <a href="world/index.html" target="_blank" class="responsive-button">
     <p>Page</p>
     <img src="./images/microsoft_paint.webp">

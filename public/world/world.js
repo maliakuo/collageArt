@@ -100,7 +100,7 @@ function write(text, id) {
 //    });
 //}
 
-let blurb = "This piece explores collage's inherently collaborative nature. Collage acts as a conduit between disparate pieces of media, people, and times. Through web sockets, this site enables real-time collaboration, giving rise to unexpected results and interactions on this digital canvas. Take a seat and visit the site to begin."
+let blurb = "This piece explores collage's inherently collaborative nature. Collage acts as a conduit between disparate pieces of media, people, and times. Through web sockets, this site enables real-time collaboration, giving rise to unexpected results and interactions on this digital canvas. Visit the site to engage with the project."
 
 //
 let Connections = [];
@@ -111,11 +111,11 @@ socket.on('connectionsUpdate', function(connections) {
   // handle
   if (connections.length == 0) {
     write(blurb, "caption");
-    write("www.hereiam.com", "site_link");
+    write("hereiam.glitch.me", "site_link");
   } else {
     $('#caption').find('span').remove()
     $('#site_link').find('span').remove()
-
+    $('#qr_code').find('img').remove()
   }
   Connections = connections;
   

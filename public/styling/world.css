@@ -52,12 +52,27 @@
     color: #000;
     padding: 0.05rem;
   } */
+  #qr_code {
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    width: 12.5%;
+    transform: translate(-50%, -50%);
+
+  }
+
+  #qr_code img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 
   #caption {
     position: fixed;
-    bottom: 50vh;
-    left: 50vh;
+    top: 65%;
+    left: 50%;
     width: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
     display: flex;
     justify-content: center;
@@ -74,16 +89,18 @@
 
   #site_link {
     position: fixed;
-    bottom: 75vh;
-    left: 50vh;
+    top: 15%;
+    left: 50%;
     width: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
     display: flex;
     justify-content: center;
     z-index: 99;
-    font-size: 1.05rem;
+    font-size: 3rem;
     letter-spacing: -2.5%;
   }
+
   #site_link span {
     display: inline;
     background: #e4fcff;
