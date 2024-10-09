@@ -112,6 +112,7 @@ socket.on('connectionsUpdate', function(connections) {
   if (connections.length == 0) {
     write(blurb, "caption");
     write("hereiam.glitch.me", "site_link");
+    $('#qr_code').prepend('<img src="../images/hereiam.png" />');
   } else {
     $('#caption').find('span').remove()
     $('#site_link').find('span').remove()
