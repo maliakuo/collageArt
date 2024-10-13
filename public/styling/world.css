@@ -26,6 +26,10 @@
   [identity] {
     position: absolute;
   }
+
+  .fake_obj {
+    position: absolute;
+  }
   
   audio {
     position: fixed;

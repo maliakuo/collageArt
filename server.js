@@ -230,6 +230,22 @@ app.get('/api/html-files', (req, res) => {
   });
 });
 
+// List HTML files in public directory
+app.get('/api/gifs', (req, res) => {
+  const publicDir = path.join(__dirname, 'public/images');
+  fs.readdir(publicDir, (err, files) => {
+    if (err) {
+      console.error('Unable to scan directory:', err);
+      return res.status(500).send('Unable to scan directory');
+    }
+
+    // Filter out non-HTML files and 'index.html'
+    const htmlFiles = files.filter(file => file.endsWith('.gif'));
+    res.json(htmlFiles);
+  });
+});
+
+
 
 //server.listen(PORT, localIP, () => {
 //  console.log(`A beautiful world alive on http://${localIP}:${PORT}`);
